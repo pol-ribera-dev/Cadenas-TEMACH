@@ -1,4 +1,4 @@
-#NFT TEMACH
+# NFT TEMACH
 
 El Temach es un youtuber mexicano cuya comunidad utiliza el símbolo de la cadena militar como un signo de conexión, pertenencia y motivación para el Modo Guerra.
 
