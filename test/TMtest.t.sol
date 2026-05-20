@@ -44,10 +44,9 @@ contract TMTest is Test {
     }
 
     function testJustOneMint() public {
-        vm.prank(user);
+        vm.startPrank(user);
         nft.mint();
         vm.expectRevert("Already minted");
-        vm.prank(user);
         nft.mint();
         vm.stopPrank();
     }
