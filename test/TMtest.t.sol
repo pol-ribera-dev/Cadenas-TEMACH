@@ -25,7 +25,6 @@ contract TMTest is Test {
     function setUp() public {
         vm.prank(owner);
         nft = new CadenaTM(name_, symbol_, amount_, baseURI_, royalty_);
-        vm.stopPrank();
     }
 
     function testDeployCorrect() view public {
@@ -39,7 +38,6 @@ contract TMTest is Test {
     function testMint() public {
         vm.prank(user);
         nft.mint();
-        vm.stopPrank();
         assertEq(nft.ownerOf(0), user);
     }
 
@@ -56,13 +54,11 @@ contract TMTest is Test {
         for (uint256 i = 0; i < 400; i++) {
             vm.prank(address(uint160(i+1)));
             nft.mint();
-            vm.stopPrank();
         }
 
         vm.expectRevert("Sold out");
         vm.prank(address(999));
         nft.mint();
-        vm.stopPrank();
     }
 
     function testMoreThanOneMindAndDiferentType() public {
@@ -70,7 +66,6 @@ contract TMTest is Test {
         for (uint256 i = 0; i < 400; i++) {
             vm.prank(address(uint160(i+1)));
             nft.mint();
-            vm.stopPrank();
         }
 
         for (uint256 i = 0; i < 400; i++) {
@@ -78,7 +73,6 @@ contract TMTest is Test {
             assertEq(nft.balanceOf(address(uint160(i+1))), 1);
             assertEq((nft.tokenURI(i)), string.concat("ipfs://bafybeigehs2otkbzipneb47bxi3jyzuc3glh7wg6enbior25352w3kmhkq/", vm.toString(i),".json"));
         }
-        
     }
 
     function testNoUri() public {
@@ -89,7 +83,6 @@ contract TMTest is Test {
     function testRoyaltyInfo() public {
         vm.prank(user);
         nft.mint();
-        vm.stopPrank();
 
         uint256 salePrice = 1 ether;
 
@@ -98,5 +91,4 @@ contract TMTest is Test {
         assertEq(receiver, owner);
         assertEq(royaltyAmount, salePrice*royalty_/10000);
     }
-   
 }
