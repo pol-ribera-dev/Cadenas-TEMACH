@@ -35,13 +35,13 @@ contract TMTest is Test {
         assertEq(nft.symbol(), symbol_);
     }
 
-    function testMint() public {
+    function testMintCorrect() public {
         vm.prank(user);
         nft.mint();
         assertEq(nft.ownerOf(0), user);
     }
 
-    function testJustOneMint() public {
+    function testJustOneMintPerAddress() public {
         vm.startPrank(user);
         nft.mint();
         vm.expectRevert("Already minted");
@@ -61,7 +61,7 @@ contract TMTest is Test {
         nft.mint();
     }
 
-    function testMoreThanOneMindAndDiferentType() public {
+    function testAllUrisAreCorrect() public {
         
         for (uint256 i = 0; i < 400; i++) {
             vm.prank(address(uint160(i+1)));
@@ -75,12 +75,12 @@ contract TMTest is Test {
         }
     }
 
-    function testNoUri() public {
+    function testGetUriWithoutMinting() public {
         vm.expectRevert();
         nft.tokenURI(1);
     }
 
-    function testRoyaltyInfo() public {
+    function testRoyaltyCorrect() public {
         vm.prank(user);
         nft.mint();
 
